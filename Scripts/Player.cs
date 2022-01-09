@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private CharacterController _chrController;
 
     [Header("Movement:")]
-    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _speed = 1.5f;
     [SerializeField] private float gravity = 9.81f;
     private float _velocityY = 0f;
     [SerializeField] private AudioSource _Step;
@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
 
     void CalculateMovement()
     {
+        float currentSpeed = _speed;
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -70,7 +71,13 @@ public class Player : MonoBehaviour
             _velocityY -= gravity;
         }
         Vector3 direction = new Vector3(horizontalInput, _velocityY, verticalInput);
-        Vector3 velocity = direction * _speed;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed *= 2.0f;
+        }
+
+        Vector3 velocity = direction * currentSpeed;
         velocity = transform.TransformDirection(velocity);
         _chrController.Move(velocity * Time.deltaTime);
     }

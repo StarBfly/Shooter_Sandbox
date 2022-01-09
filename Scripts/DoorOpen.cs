@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
-    [SerializeField] public bool unlocked;
+    [SerializeField] public bool unlocked = false;
     private float _yEulerAngel;
 
     // Start is called before the first frame update
