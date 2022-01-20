@@ -116,6 +116,11 @@ public class Player : MonoBehaviour
                     DestructiveCrate destructiveCrate = hitInfo.transform.GetComponent<DestructiveCrate>();
                     destructiveCrate.destructed = true;
                 }
+                if (hitInfo.transform.tag == "Mutant")
+                {
+                    Mutant mutant = hitInfo.transform.gameObject.GetComponent<Mutant>();
+                    mutant.Damage();
+                }
                 StartCoroutine(RemoveHitMarks(newHitMak));
             }
         }
